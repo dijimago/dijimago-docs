@@ -8,235 +8,302 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0a0d12;
-  --surface: #111620;
-  --border: #1e2535;
-  --border2: #2a3448;
+  --bg: #080b10;
+  --surface: #0f1420;
+  --surface2: #141926;
+  --border: #1a2235;
+  --border2: #243048;
   --text: #e2e8f6;
-  --muted: #6b7a99;
+  --muted: #5a6a8a;
   --accent: #2fe0c5;
   --accent2: #39a7ff;
   --get: #22c55e;
   --post: #3b82f6;
   --put: #f59e0b;
   --del: #ef4444;
-  --tag-kvkk: #a78bfa;
-  --tag-ai: #34d399;
-  --tag-payment: #fb923c;
-  --tag-dealer: #f472b6;
-  --tag-commerce: #60a5fa;
-  --tag-audit: #facc15;
-  --sidebar-w: 260px;
+  --sidebar-w: 256px;
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Sora', sans-serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; font-size: 14px; line-height: 1.6; }
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);display:flex;min-height:100vh;font-size:14px;line-height:1.6;}
 
 /* SIDEBAR */
-nav { width: var(--sidebar-w); min-height: 100vh; background: var(--surface); border-right: 1px solid var(--border); position: fixed; top: 0; left: 0; overflow-y: auto; display: flex; flex-direction: column; }
-.logo { padding: 24px 20px 20px; border-bottom: 1px solid var(--border); }
-.logo-name { font-size: 15px; font-weight: 600; color: var(--accent); letter-spacing: -0.3px; }
-.logo-sub { font-size: 11px; color: var(--muted); font-family: 'IBM Plex Mono', monospace; margin-top: 2px; }
-.nav-section { padding: 8px 0; }
-.nav-label { font-size: 10px; font-weight: 600; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; padding: 12px 20px 6px; }
-.nav-link { display: flex; align-items: center; gap: 8px; padding: 7px 20px; font-size: 13px; color: var(--muted); text-decoration: none; transition: all 0.15s; cursor: pointer; border-left: 2px solid transparent; }
-.nav-link:hover { color: var(--text); background: rgba(255,255,255,0.03); }
-.nav-link.active { color: var(--accent); border-left-color: var(--accent); background: rgba(47,224,197,0.05); }
-.nav-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+nav{width:var(--sidebar-w);min-height:100vh;background:var(--surface);border-right:1px solid var(--border);position:fixed;top:0;left:0;overflow-y:auto;display:flex;flex-direction:column;z-index:100;}
+.logo{padding:20px;border-bottom:1px solid var(--border);}
+.logo-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(47,224,197,0.08);border:1px solid rgba(47,224,197,0.15);color:var(--accent);font-size:10px;font-family:'IBM Plex Mono',monospace;padding:3px 8px;border-radius:20px;margin-bottom:8px;}
+.logo-name{font-size:14px;font-weight:600;color:var(--text);letter-spacing:-0.3px;}
+.logo-sub{font-size:11px;color:var(--muted);font-family:'IBM Plex Mono',monospace;margin-top:2px;}
+.nav-links{padding:8px 0 24px;}
+.nav-label{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:1px;text-transform:uppercase;padding:14px 20px 6px;}
+.nav-link{display:flex;align-items:center;gap:8px;padding:6px 20px;font-size:12.5px;color:var(--muted);text-decoration:none;transition:all 0.15s;cursor:pointer;border-left:2px solid transparent;}
+.nav-link:hover{color:var(--text);background:rgba(255,255,255,0.02);}
+.nav-link.active{color:var(--accent);border-left-color:var(--accent);background:rgba(47,224,197,0.04);}
+.nav-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+
+/* TOP NAV BUTTONS */
+.nav-actions{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:6px;}
+.nav-btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:7px 12px;border-radius:6px;font-size:11.5px;font-weight:500;text-decoration:none;transition:all 0.15s;cursor:pointer;border:1px solid var(--border2);color:var(--muted);}
+.nav-btn:hover{color:var(--text);border-color:var(--border2);background:rgba(255,255,255,0.04);}
+.nav-btn.primary{background:rgba(47,224,197,0.08);border-color:rgba(47,224,197,0.2);color:var(--accent);}
+.nav-btn.primary:hover{background:rgba(47,224,197,0.15);}
 
 /* MAIN */
-main { margin-left: var(--sidebar-w); flex: 1; max-width: 900px; padding: 48px 48px 120px; }
+main{margin-left:var(--sidebar-w);flex:1;padding:0;max-width:100%;}
+.content{max-width:820px;padding:48px 48px 120px;}
 
-/* HEADER */
-.hero { margin-bottom: 56px; }
-.version-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(47,224,197,0.1); border: 1px solid rgba(47,224,197,0.2); color: var(--accent); font-size: 11px; font-family: 'IBM Plex Mono', monospace; padding: 4px 10px; border-radius: 20px; margin-bottom: 16px; }
-.hero h1 { font-size: 36px; font-weight: 600; letter-spacing: -1px; line-height: 1.2; margin-bottom: 12px; }
-.hero h1 span { color: var(--accent); }
-.hero p { color: var(--muted); font-size: 15px; max-width: 560px; line-height: 1.7; }
-.base-url { display: flex; align-items: center; gap: 10px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; margin-top: 24px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; }
-.base-url-label { color: var(--muted); font-size: 11px; }
-.base-url-val { color: var(--accent2); }
+/* HERO */
+.hero{margin-bottom:48px;padding-bottom:48px;border-bottom:1px solid var(--border);}
+.hero-eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:20px;}
+.live-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);color:var(--get);font-size:10px;font-family:'IBM Plex Mono',monospace;padding:4px 10px;border-radius:20px;}
+.live-dot{width:5px;height:5px;border-radius:50%;background:var(--get);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+.version-tag{font-size:10px;font-family:'IBM Plex Mono',monospace;color:var(--muted);background:var(--surface2);border:1px solid var(--border);padding:4px 10px;border-radius:20px;}
+.hero h1{font-size:38px;font-weight:600;letter-spacing:-1.2px;line-height:1.15;margin-bottom:14px;}
+.hero h1 em{font-style:normal;color:var(--accent);}
+.hero p{color:var(--muted);font-size:14px;max-width:520px;line-height:1.75;margin-bottom:28px;}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;}
+.hero-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:7px;font-size:12.5px;font-weight:500;text-decoration:none;transition:all 0.15s;border:1px solid;}
+.hero-btn.primary{background:rgba(47,224,197,0.1);border-color:rgba(47,224,197,0.25);color:var(--accent);}
+.hero-btn.primary:hover{background:rgba(47,224,197,0.18);}
+.hero-btn.secondary{background:rgba(57,167,255,0.08);border-color:rgba(57,167,255,0.2);color:var(--accent2);}
+.hero-btn.secondary:hover{background:rgba(57,167,255,0.15);}
+.hero-btn.tertiary{background:rgba(255,255,255,0.03);border-color:var(--border2);color:var(--muted);}
+.hero-btn.tertiary:hover{color:var(--text);background:rgba(255,255,255,0.06);}
+.base-url-box{display:flex;align-items:center;gap:12px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;}
+.base-url-label{font-size:10px;color:var(--muted);font-family:'IBM Plex Mono',monospace;white-space:nowrap;}
+.base-url-val{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--accent2);}
+
+/* INFO GRID */
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:40px;}
+.info-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;}
+.info-card-label{font-size:10px;color:var(--muted);margin-bottom:4px;font-family:'IBM Plex Mono',monospace;}
+.info-card-val{font-size:13px;font-weight:500;}
+
+/* MODULE GRID */
+.module-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:48px;}
+.module-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 14px;cursor:pointer;transition:all 0.15s;text-decoration:none;display:block;}
+.module-card:hover{border-color:var(--border2);background:var(--surface2);}
+.module-name{font-size:12.5px;font-weight:500;margin-bottom:2px;}
+.module-count{font-size:11px;color:var(--muted);font-family:'IBM Plex Mono',monospace;}
 
 /* SECTION */
-.section { margin-bottom: 64px; }
-.section-title { font-size: 22px; font-weight: 600; letter-spacing: -0.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
-.section-desc { color: var(--muted); margin-bottom: 24px; font-size: 13px; }
-.tag { font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.5px; text-transform: uppercase; }
+.section{margin-bottom:56px;scroll-margin-top:24px;}
+.section-header{margin-bottom:20px;}
+.section-title{font-size:20px;font-weight:600;letter-spacing:-0.4px;display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.section-desc{color:var(--muted);font-size:13px;line-height:1.7;}
+.tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;letter-spacing:0.4px;text-transform:uppercase;}
 
-/* ENDPOINT CARD */
-.endpoint { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; overflow: hidden; }
-.endpoint-header { display: flex; align-items: center; gap: 12px; padding: 14px 18px; cursor: pointer; user-select: none; }
-.endpoint-header:hover { background: rgba(255,255,255,0.02); }
-.method { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: 4px; min-width: 46px; text-align: center; }
-.m-get { background: rgba(34,197,94,0.12); color: var(--get); }
-.m-post { background: rgba(59,130,246,0.12); color: var(--post); }
-.m-put { background: rgba(245,158,11,0.12); color: var(--put); }
-.m-del { background: rgba(239,68,68,0.12); color: var(--del); }
-.endpoint-path { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--text); flex: 1; }
-.endpoint-summary { font-size: 12px; color: var(--muted); margin-left: auto; }
-.chevron { color: var(--muted); font-size: 12px; transition: transform 0.2s; }
-.endpoint.open .chevron { transform: rotate(180deg); }
-.endpoint-body { border-top: 1px solid var(--border); padding: 18px; display: none; }
-.endpoint.open .endpoint-body { display: block; }
-.endpoint-desc { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+/* ALERT BOXES */
+.alert{border-radius:8px;padding:14px 16px;margin-bottom:20px;display:flex;gap:12px;align-items:flex-start;}
+.alert-icon{font-size:15px;flex-shrink:0;margin-top:1px;}
+.alert-body{}
+.alert-title{font-size:12px;font-weight:600;margin-bottom:3px;}
+.alert-text{font-size:12px;color:var(--muted);line-height:1.6;}
+.alert.advisory{background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.15);}
+.alert.advisory .alert-title{color:#34d399;}
+.alert.warning{background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15);}
+.alert.warning .alert-title{color:#f59e0b;}
+.alert.info{background:rgba(57,167,255,0.06);border:1px solid rgba(57,167,255,0.15);}
+.alert.info .alert-title{color:var(--accent2);}
+.alert.kvkk{background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.15);}
+.alert.kvkk .alert-title{color:#a78bfa;}
 
-/* PARAMS TABLE */
-.params-title { font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 12px; }
-th { text-align: left; padding: 8px 12px; color: var(--muted); font-weight: 500; font-size: 11px; border-bottom: 1px solid var(--border); }
-td { padding: 8px 12px; border-bottom: 1px solid rgba(30,37,53,0.5); vertical-align: top; }
-td:first-child { font-family: 'IBM Plex Mono', monospace; color: var(--accent2); }
-.req-badge { font-size: 9px; background: rgba(239,68,68,0.15); color: #f87171; padding: 1px 5px; border-radius: 3px; margin-left: 4px; }
-.opt-badge { font-size: 9px; background: rgba(107,122,153,0.15); color: var(--muted); padding: 1px 5px; border-radius: 3px; margin-left: 4px; }
+/* ENDPOINT */
+.endpoint{background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;overflow:hidden;transition:border-color 0.15s;}
+.endpoint:hover{border-color:var(--border2);}
+.endpoint-header{display:flex;align-items:center;gap:10px;padding:13px 16px;cursor:pointer;user-select:none;}
+.method{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:500;padding:3px 7px;border-radius:4px;min-width:44px;text-align:center;flex-shrink:0;}
+.m-get{background:rgba(34,197,94,0.1);color:var(--get);}
+.m-post{background:rgba(59,130,246,0.1);color:var(--post);}
+.m-put{background:rgba(245,158,11,0.1);color:var(--put);}
+.m-del{background:rgba(239,68,68,0.1);color:var(--del);}
+.endpoint-path{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--text);flex:1;}
+.endpoint-summary{font-size:11.5px;color:var(--muted);margin-left:auto;white-space:nowrap;}
+.chevron{color:var(--muted);font-size:10px;transition:transform 0.2s;margin-left:8px;flex-shrink:0;}
+.endpoint.open .chevron{transform:rotate(180deg);}
+.endpoint-body{border-top:1px solid var(--border);padding:16px;display:none;}
+.endpoint.open .endpoint-body{display:block;}
+.endpoint-desc{color:var(--muted);font-size:12.5px;margin-bottom:14px;line-height:1.7;}
 
-/* CODE BLOCK */
-pre { background: #080b10; border: 1px solid var(--border); border-radius: 8px; padding: 16px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1.7; overflow-x: auto; margin-top: 8px; }
-.code-label { font-size: 10px; font-weight: 600; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin: 16px 0 6px; }
-.s { color: #a3e635; }
-.n { color: var(--accent2); }
-.k { color: var(--accent); }
-.b { color: #fb923c; }
-.c { color: var(--muted); }
+/* TABLE */
+.params-title{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
+table{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:12px;}
+th{text-align:left;padding:7px 10px;color:var(--muted);font-weight:500;font-size:10.5px;border-bottom:1px solid var(--border);}
+td{padding:7px 10px;border-bottom:1px solid rgba(26,34,53,0.5);vertical-align:top;}
+td:first-child{font-family:'IBM Plex Mono',monospace;color:var(--accent2);}
+.req{font-size:9px;background:rgba(239,68,68,0.12);color:#f87171;padding:1px 5px;border-radius:3px;margin-left:4px;}
+.opt{font-size:9px;background:rgba(90,106,138,0.15);color:var(--muted);padding:1px 5px;border-radius:3px;margin-left:4px;}
 
-/* RESPONSE CHIPS */
-.responses { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
-.resp { font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 4px 10px; border-radius: 4px; }
-.resp-200 { background: rgba(34,197,94,0.1); color: var(--get); }
-.resp-201 { background: rgba(59,130,246,0.1); color: var(--post); }
-.resp-400 { background: rgba(245,158,11,0.1); color: var(--put); }
-.resp-404 { background: rgba(239,68,68,0.1); color: var(--del); }
+/* CODE */
+pre{background:#060810;border:1px solid var(--border);border-radius:8px;padding:14px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;line-height:1.75;overflow-x:auto;margin-top:8px;}
+.code-label{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin:14px 0 5px;}
+.s{color:#a3e635;}.n{color:var(--accent2);}.k{color:var(--accent);}.b{color:#fb923c;}.c{color:#3d4f6b;}
 
-/* INFO CARDS */
-.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
-.info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
-.info-card-title { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
-.info-card-val { font-size: 14px; font-weight: 500; }
+/* RESPONSE BADGES */
+.responses{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
+.resp{font-family:'IBM Plex Mono',monospace;font-size:10.5px;padding:3px 9px;border-radius:4px;}
+.r200{background:rgba(34,197,94,0.08);color:var(--get);}
+.r201{background:rgba(59,130,246,0.08);color:var(--post);}
+.r400{background:rgba(245,158,11,0.08);color:var(--put);}
+.r404{background:rgba(239,68,68,0.08);color:var(--del);}
 
-/* MODULES GRID */
-.modules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 40px; }
-.module-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
-.module-name { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
-.module-count { font-size: 11px; color: var(--muted); font-family: 'IBM Plex Mono', monospace; }
-
-hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+/* DIVIDER */
+hr{border:none;border-top:1px solid var(--border);margin:48px 0;}
 
 /* SCROLLBAR */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+
+/* MOBILE */
+@media(max-width:768px){
+  nav{width:100%;min-height:auto;position:relative;border-right:none;border-bottom:1px solid var(--border);}
+  body{flex-direction:column;}
+  main{margin-left:0;}
+  .content{padding:24px 20px 80px;}
+  .hero h1{font-size:26px;}
+  .module-grid{grid-template-columns:1fr 1fr;}
+  .info-grid{grid-template-columns:1fr 1fr;}
+  .hero-actions{flex-direction:column;}
+  .endpoint-summary{display:none;}
+}
 </style>
 </head>
 <body>
 
 <nav>
   <div class="logo">
+    <div class="logo-badge"><span style="width:5px;height:5px;border-radius:50%;background:var(--get);display:inline-block;"></span> v1.0 · Live</div>
     <div class="logo-name">Dijimago API</div>
-    <div class="logo-sub">v1.0 · Enterprise</div>
+    <div class="logo-sub">Enterprise Documentation</div>
   </div>
-  <div class="nav-section">
+  <div class="nav-actions">
+    <a class="nav-btn primary" href="https://dijimago-enterprise-backend.onrender.com/swagger/index.html" target="_blank">⚡ Swagger UI</a>
+    <a class="nav-btn secondary" href="https://dijimago-enterprise-backend.onrender.com/health" target="_blank">◉ API Status</a>
+    <a class="nav-btn tertiary" href="https://dijimago.com" target="_blank">↗ dijimago.com</a>
+  </div>
+  <div class="nav-links">
     <div class="nav-label">Genel</div>
-    <a class="nav-link active" onclick="scrollTo('intro')"><span class="nav-dot" style="background:#2fe0c5"></span>Giriş</a>
-    <a class="nav-link" onclick="scrollTo('auth')"><span class="nav-dot" style="background:#6b7a99"></span>Authentication</a>
-    <a class="nav-link" onclick="scrollTo('errors')"><span class="nav-dot" style="background:#6b7a99"></span>Hata kodları</a>
-  </div>
-  <div class="nav-section">
+    <a class="nav-link active" onclick="goto('intro')"><span class="nav-dot" style="background:#2fe0c5"></span>Giriş</a>
+    <a class="nav-link" onclick="goto('auth')"><span class="nav-dot" style="background:#5a6a8a"></span>Authentication</a>
+    <a class="nav-link" onclick="goto('errors')"><span class="nav-dot" style="background:#5a6a8a"></span>Hata kodları</a>
     <div class="nav-label">Modüller</div>
-    <a class="nav-link" onclick="scrollTo('health')"><span class="nav-dot" style="background:#22c55e"></span>Health & Dashboard</a>
-    <a class="nav-link" onclick="scrollTo('cards')"><span class="nav-dot" style="background:#39a7ff"></span>Dijital Kimlik</a>
-    <a class="nav-link" onclick="scrollTo('leads')"><span class="nav-dot" style="background:#a78bfa"></span>Lead Yönetimi</a>
-    <a class="nav-link" onclick="scrollTo('events')"><span class="nav-dot" style="background:#fb923c"></span>Event Collector</a>
-    <a class="nav-link" onclick="scrollTo('docs')"><span class="nav-dot" style="background:#60a5fa"></span>Dokümanlar</a>
-    <a class="nav-link" onclick="scrollTo('engage')"><span class="nav-dot" style="background:#34d399"></span>Engage & CRM</a>
-    <a class="nav-link" onclick="scrollTo('ai')"><span class="nav-dot" style="background:#34d399"></span>AI Endpoints</a>
-    <a class="nav-link" onclick="scrollTo('payment')"><span class="nav-dot" style="background:#fb923c"></span>Payment Events</a>
-    <a class="nav-link" onclick="scrollTo('dealer')"><span class="nav-dot" style="background:#f472b6"></span>Dealer Events</a>
-    <a class="nav-link" onclick="scrollTo('commerce')"><span class="nav-dot" style="background:#60a5fa"></span>Commerce Events</a>
-    <a class="nav-link" onclick="scrollTo('kvkk')"><span class="nav-dot" style="background:#a78bfa"></span>KVKK / Consent</a>
-    <a class="nav-link" onclick="scrollTo('audit')"><span class="nav-dot" style="background:#facc15"></span>Audit Log</a>
-    <a class="nav-link" onclick="scrollTo('nfc')"><span class="nav-dot" style="background:#6b7a99"></span>NFC</a>
+    <a class="nav-link" onclick="goto('health')"><span class="nav-dot" style="background:#22c55e"></span>Health & Dashboard</a>
+    <a class="nav-link" onclick="goto('identity')"><span class="nav-dot" style="background:#39a7ff"></span>Dijital Kimlik</a>
+    <a class="nav-link" onclick="goto('leads')"><span class="nav-dot" style="background:#a78bfa"></span>Lead Yönetimi</a>
+    <a class="nav-link" onclick="goto('events')"><span class="nav-dot" style="background:#fb923c"></span>Event Collector</a>
+    <a class="nav-link" onclick="goto('docs')"><span class="nav-dot" style="background:#60a5fa"></span>Dokümanlar</a>
+    <a class="nav-link" onclick="goto('engage')"><span class="nav-dot" style="background:#34d399"></span>Engage & CRM</a>
+    <a class="nav-link" onclick="goto('ai')"><span class="nav-dot" style="background:#34d399"></span>AI Endpoints</a>
+    <a class="nav-link" onclick="goto('payment')"><span class="nav-dot" style="background:#fb923c"></span>Payment Events</a>
+    <a class="nav-link" onclick="goto('dealer')"><span class="nav-dot" style="background:#f472b6"></span>Dealer Events</a>
+    <a class="nav-link" onclick="goto('commerce')"><span class="nav-dot" style="background:#60a5fa"></span>Commerce Events</a>
+    <a class="nav-link" onclick="goto('kvkk')"><span class="nav-dot" style="background:#a78bfa"></span>KVKK / Consent</a>
+    <a class="nav-link" onclick="goto('audit')"><span class="nav-dot" style="background:#facc15"></span>Audit Log</a>
+    <a class="nav-link" onclick="goto('nfc')"><span class="nav-dot" style="background:#5a6a8a"></span>NFC</a>
   </div>
 </nav>
 
 <main>
+<div class="content">
 
 <!-- HERO -->
-<div class="hero" id="intro">
-  <div class="version-badge">● v1.0 · Live</div>
-  <h1>Dijimago Enterprise<br><span>API Dokümantasyonu</span></h1>
-  <p>First-party engagement data platformu. Dijital kimlik, lead yönetimi, ödeme event'leri, bayi tahsilat sinyalleri ve AI destekli skorlama için tek API.</p>
-  <div class="base-url">
-    <div>
-      <div class="base-url-label">BASE URL</div>
-      <div class="base-url-val">https://dijimago-enterprise-backend.onrender.com</div>
-    </div>
+<section class="hero" id="intro">
+  <div class="hero-eyebrow">
+    <div class="live-badge"><span class="live-dot"></span> Live</div>
+    <div class="version-tag">v1.0.0</div>
+    <div class="version-tag">.NET 8</div>
   </div>
-</div>
+  <h1>Dijimago Enterprise<br><em>API Dokümantasyonu</em></h1>
+  <p>First-party engagement data platformu. Dijital kimlik, lead yönetimi, ödeme event'leri, bayi tahsilat sinyalleri ve AI destekli skorlama için tek API.</p>
+  <div class="hero-actions">
+    <a class="hero-btn primary" href="https://dijimago-enterprise-backend.onrender.com/swagger/index.html" target="_blank">⚡ Swagger UI'ı Aç</a>
+    <a class="hero-btn secondary" href="#events">◎ API Demo Dashboard</a>
+    <a class="hero-btn tertiary" href="https://dijimago-enterprise-backend.onrender.com/health" target="_blank">◉ API Status Kontrol</a>
+  </div>
+  <div class="base-url-box">
+    <div class="base-url-label">BASE URL</div>
+    <div class="base-url-val">https://dijimago-enterprise-backend.onrender.com</div>
+  </div>
+</section>
 
 <!-- INFO -->
 <div class="info-grid">
-  <div class="info-card"><div class="info-card-title">Format</div><div class="info-card-val">JSON (application/json)</div></div>
-  <div class="info-card"><div class="info-card-title">Auth</div><div class="info-card-val">X-API-KEY header</div></div>
-  <div class="info-card"><div class="info-card-title">Swagger</div><div class="info-card-val">/swagger/index.html</div></div>
-  <div class="info-card"><div class="info-card-title">Platform</div><div class="info-card-val">.NET 8 · Render Cloud</div></div>
+  <div class="info-card"><div class="info-card-label">Format</div><div class="info-card-val">JSON · application/json</div></div>
+  <div class="info-card"><div class="info-card-label">Auth</div><div class="info-card-val">X-API-KEY header</div></div>
+  <div class="info-card"><div class="info-card-label">Swagger</div><div class="info-card-val">/swagger/index.html</div></div>
+  <div class="info-card"><div class="info-card-label">Platform</div><div class="info-card-val">.NET 8 · Render Cloud</div></div>
 </div>
 
 <!-- MODULES -->
-<div class="modules">
-  <div class="module-card"><div class="module-name" style="color:#2fe0c5">Health & Dashboard</div><div class="module-count">3 endpoint</div></div>
-  <div class="module-card"><div class="module-name" style="color:#39a7ff">Dijital Kimlik</div><div class="module-count">8 endpoint</div></div>
-  <div class="module-card"><div class="module-name" style="color:#a78bfa">Lead Yönetimi</div><div class="module-count">6 endpoint</div></div>
-  <div class="module-card"><div class="module-name" style="color:#fb923c">Event Collector</div><div class="module-count">6 endpoint</div></div>
-  <div class="module-card"><div class="module-name" style="color:#60a5fa">Dokümanlar</div><div class="module-count">5 endpoint</div></div>
-  <div class="module-card"><div class="module-name" style="color:#34d399">Engage & CRM</div><div class="module-count">4 endpoint</div></div>
-  <div class="module-card"><div class="module-name" style="color:#34d399">AI Endpoints</div><div class="module-count">6 endpoint</div></div>
-  <div class="module-card"><div class="module-name" style="color:#fb923c">Payment Events</div><div class="module-count">5 endpoint</div></div>
-  <div class="module-card"><div class="module-name" style="color:#f472b6">Dealer Events</div><div class="module-count">6 endpoint</div></div>
-  <div class="module-card"><div class="module-name" style="color:#60a5fa">Commerce Events</div><div class="module-count">6 endpoint</div></div>
-  <div class="module-card"><div class="module-name" style="color:#a78bfa">KVKK / Consent</div><div class="module-count">6 endpoint</div></div>
-  <div class="module-card"><div class="module-name" style="color:#facc15">Audit Log</div><div class="module-count">5 endpoint</div></div>
+<div class="module-grid">
+  <a class="module-card" onclick="goto('health')"><div class="module-name" style="color:#2fe0c5">Health & Dashboard</div><div class="module-count">3 endpoint</div></a>
+  <a class="module-card" onclick="goto('identity')"><div class="module-name" style="color:#39a7ff">Dijital Kimlik</div><div class="module-count">8 endpoint</div></a>
+  <a class="module-card" onclick="goto('leads')"><div class="module-name" style="color:#a78bfa">Lead Yönetimi</div><div class="module-count">6 endpoint</div></a>
+  <a class="module-card" onclick="goto('events')"><div class="module-name" style="color:#fb923c">Event Collector</div><div class="module-count">6 endpoint</div></a>
+  <a class="module-card" onclick="goto('docs')"><div class="module-name" style="color:#60a5fa">Dokümanlar</div><div class="module-count">5 endpoint</div></a>
+  <a class="module-card" onclick="goto('engage')"><div class="module-name" style="color:#34d399">Engage & CRM</div><div class="module-count">4 endpoint</div></a>
+  <a class="module-card" onclick="goto('ai')"><div class="module-name" style="color:#34d399">AI Endpoints</div><div class="module-count">6 endpoint</div></a>
+  <a class="module-card" onclick="goto('payment')"><div class="module-name" style="color:#fb923c">Payment Events</div><div class="module-count">5 endpoint</div></a>
+  <a class="module-card" onclick="goto('dealer')"><div class="module-name" style="color:#f472b6">Dealer Events</div><div class="module-count">6 endpoint</div></a>
+  <a class="module-card" onclick="goto('commerce')"><div class="module-name" style="color:#60a5fa">Commerce Events</div><div class="module-count">6 endpoint</div></a>
+  <a class="module-card" onclick="goto('kvkk')"><div class="module-name" style="color:#a78bfa">KVKK / Consent</div><div class="module-count">6 endpoint</div></a>
+  <a class="module-card" onclick="goto('audit')"><div class="module-name" style="color:#facc15">Audit Log</div><div class="module-count">5 endpoint</div></a>
 </div>
 
 <hr>
 
 <!-- AUTH -->
-<div class="section" id="auth">
-  <div class="section-title">Authentication</div>
-  <div class="section-desc">Public endpoint'ler (health, swagger, public profil, NFC) auth gerektirmez. Admin endpoint'leri için X-API-KEY header'ı zorunludur.</div>
-  <div class="code-label">İstek örneği</div>
-  <pre><span class="c"># Header ile API key gönderme</span>
+<section class="section" id="auth">
+  <div class="section-header">
+    <div class="section-title">Authentication</div>
+    <div class="section-desc">Public endpoint'ler auth gerektirmez. Admin endpoint'leri için X-API-KEY header zorunludur.</div>
+  </div>
+  <div class="alert info">
+    <div class="alert-icon">ℹ</div>
+    <div class="alert-body">
+      <div class="alert-title">Public Endpoint'ler</div>
+      <div class="alert-text">/health · /swagger · /api/public/* · /api/nfc/* — bu endpoint'ler API key gerektirmez, herkes erişebilir.</div>
+    </div>
+  </div>
+  <div class="code-label">Curl örneği</div>
+  <pre><span class="c"># Admin endpoint'e istek</span>
 curl -X GET \
   https://dijimago-enterprise-backend.onrender.com/api/leads \
   -H <span class="s">'X-API-KEY: your-api-key'</span> \
   -H <span class="s">'Content-Type: application/json'</span></pre>
-
-  <div class="code-label">Yanıt formatı (tüm endpoint'ler)</div>
+  <div class="code-label">Standart yanıt formatı</div>
   <pre>{
   <span class="n">"success"</span>: <span class="k">true</span>,
   <span class="n">"message"</span>: <span class="s">"İşlem açıklaması"</span>,
-  <span class="n">"data"</span>: { <span class="c">/* endpoint'e özel veri */</span> }
+  <span class="n">"data"</span>: { <span class="c">/* endpoint'e özel */</span> }
 }</pre>
-</div>
+</section>
 
 <!-- ERRORS -->
-<div class="section" id="errors">
-  <div class="section-title">Hata Kodları</div>
+<section class="section" id="errors">
+  <div class="section-header">
+    <div class="section-title">Hata Kodları</div>
+  </div>
   <table>
-    <tr><th>Kod</th><th>Anlamı</th><th>Çözüm</th></tr>
-    <tr><td>200</td><td style="color:#6b7a99">Başarılı GET</td><td style="color:#6b7a99">—</td></tr>
-    <tr><td>201</td><td style="color:#6b7a99">Başarılı POST (kayıt oluşturuldu)</td><td style="color:#6b7a99">—</td></tr>
-    <tr><td>400</td><td style="color:#6b7a99">Hatalı istek / eksik alan</td><td style="color:#6b7a99">message alanını kontrol et</td></tr>
-    <tr><td>401</td><td style="color:#6b7a99">API key eksik veya hatalı</td><td style="color:#6b7a99">X-API-KEY header ekle</td></tr>
-    <tr><td>404</td><td style="color:#6b7a99">Kayıt bulunamadı</td><td style="color:#6b7a99">ID veya slug'ı kontrol et</td></tr>
-    <tr><td>500</td><td style="color:#6b7a99">Sunucu hatası</td><td style="color:#6b7a99">Render loglarını kontrol et</td></tr>
+    <tr><th>Kod</th><th>Anlam</th><th>Çözüm</th></tr>
+    <tr><td>200</td><td style="color:#5a6a8a">Başarılı GET</td><td style="color:#5a6a8a">—</td></tr>
+    <tr><td>201</td><td style="color:#5a6a8a">Kayıt oluşturuldu</td><td style="color:#5a6a8a">—</td></tr>
+    <tr><td>400</td><td style="color:#5a6a8a">Hatalı istek / eksik alan</td><td style="color:#5a6a8a">message alanını kontrol et</td></tr>
+    <tr><td>401</td><td style="color:#5a6a8a">API key eksik veya hatalı</td><td style="color:#5a6a8a">X-API-KEY header ekle</td></tr>
+    <tr><td>404</td><td style="color:#5a6a8a">Kayıt bulunamadı</td><td style="color:#5a6a8a">ID veya slug'ı kontrol et</td></tr>
+    <tr><td>500</td><td style="color:#5a6a8a">Sunucu hatası</td><td style="color:#5a6a8a">Render loglarını kontrol et</td></tr>
   </table>
-</div>
+</section>
 
 <hr>
 
 <!-- HEALTH -->
-<div class="section" id="health">
-  <div class="section-title">Health & Dashboard</div>
-  <div class="section-desc">Sistem durumu ve yönetim paneli endpoint'leri.</div>
-
+<section class="section" id="health">
+  <div class="section-header">
+    <div class="section-title">Health & Dashboard</div>
+    <div class="section-desc">Sistem durumu ve yönetim paneli.</div>
+  </div>
   <div class="endpoint" onclick="toggle(this)">
     <div class="endpoint-header">
       <span class="method m-get">GET</span>
@@ -245,85 +312,60 @@ curl -X GET \
       <span class="chevron">▼</span>
     </div>
     <div class="endpoint-body">
-      <div class="endpoint-desc">API'nin çalışıp çalışmadığını kontrol eder. Auth gerektirmez.</div>
-      <div class="code-label">Başarılı yanıt</div>
-      <pre>{
-  <span class="n">"success"</span>: <span class="k">true</span>,
-  <span class="n">"data"</span>: {
-    <span class="n">"service"</span>: <span class="s">"Dijimago Enterprise API"</span>,
-    <span class="n">"status"</span>: <span class="s">"healthy"</span>,
-    <span class="n">"time"</span>: <span class="s">"2026-05-27T22:00:00Z"</span>
-  }
-}</pre>
-      <div class="responses"><span class="resp resp-200">200 OK</span></div>
+      <div class="endpoint-desc">API'nin sağlık durumunu döndürür. Auth gerektirmez. Monitoring için kullanılır.</div>
+      <div class="code-label">Yanıt</div>
+      <pre>{ <span class="n">"status"</span>: <span class="s">"healthy"</span>, <span class="n">"time"</span>: <span class="s">"2026-05-28T..."</span> }</pre>
+      <div class="responses"><span class="resp r200">200 OK</span></div>
     </div>
   </div>
-
   <div class="endpoint" onclick="toggle(this)">
     <div class="endpoint-header">
       <span class="method m-get">GET</span>
       <span class="endpoint-path">/api/admin/dashboard</span>
-      <span class="endpoint-summary">Yönetim paneli</span>
+      <span class="endpoint-summary">KPI özeti</span>
       <span class="chevron">▼</span>
     </div>
     <div class="endpoint-body">
-      <div class="endpoint-desc">KPI'ları, aktif modülleri ve son aktiviteleri döndürür.</div>
-      <div class="code-label">Yanıt</div>
-      <pre>{
-  <span class="n">"data"</span>: {
-    <span class="n">"kpis"</span>: {
-      <span class="n">"publicViews"</span>: <span class="b">42</span>,
-      <span class="n">"fileInteractions"</span>: <span class="b">17</span>,
-      <span class="n">"newLeads"</span>: <span class="b">8</span>,
-      <span class="n">"activeOffers"</span>: <span class="b">3</span>
-    },
-    <span class="n">"modules"</span>: [...],
-    <span class="n">"latestActivity"</span>: [...]
-  }
-}</pre>
-      <div class="responses"><span class="resp resp-200">200 OK</span></div>
+      <div class="endpoint-desc">Public görüntülemeler, lead sayısı, aktif teklifler ve son aktiviteleri döndürür.</div>
+      <div class="responses"><span class="resp r200">200 OK</span></div>
     </div>
   </div>
-</div>
-
-<hr>
-
-<!-- CARDS -->
-<div class="section" id="cards">
-  <div class="section-title">Dijital Kimlik <span class="tag" style="background:rgba(57,167,255,0.1);color:#39a7ff">Card</span></div>
-  <div class="section-desc">NFC/QR destekli dijital kartvizit yönetimi. Public profil ve vCard paylaşımı.</div>
-
   <div class="endpoint" onclick="toggle(this)">
     <div class="endpoint-header">
       <span class="method m-get">GET</span>
-      <span class="endpoint-path">/api/cards</span>
-      <span class="endpoint-summary">Kart listesi</span>
+      <span class="endpoint-path">/api/wallet/status</span>
+      <span class="endpoint-summary">Wallet modül durumu</span>
       <span class="chevron">▼</span>
     </div>
     <div class="endpoint-body">
-      <div class="endpoint-desc">Organizasyona ait tüm dijital kartları döndürür.</div>
-      <div class="responses"><span class="resp resp-200">200 OK</span></div>
+      <div class="endpoint-desc">Dijimago Wallet modülünün mevcut durumunu ve yol haritasını döndürür.</div>
+      <div class="responses"><span class="resp r200">200 OK</span></div>
     </div>
   </div>
+</section>
 
+<hr>
+
+<!-- IDENTITY -->
+<section class="section" id="identity">
+  <div class="section-header">
+    <div class="section-title">Dijital Kimlik <span class="tag" style="background:rgba(57,167,255,0.1);color:#39a7ff">Card</span></div>
+    <div class="section-desc">NFC/QR destekli dijital kartvizit yönetimi. Public profil ve vCard paylaşımı.</div>
+  </div>
   <div class="endpoint" onclick="toggle(this)">
-    <div class="endpoint-header">
-      <span class="method m-post">POST</span>
-      <span class="endpoint-path">/api/cards</span>
-      <span class="endpoint-summary">Yeni kart oluştur</span>
-      <span class="chevron">▼</span>
-    </div>
+    <div class="endpoint-header"><span class="method m-get">GET</span><span class="endpoint-path">/api/cards</span><span class="endpoint-summary">Tüm kartlar</span><span class="chevron">▼</span></div>
+    <div class="endpoint-body"><div class="endpoint-desc">Organizasyona ait tüm dijital kartları döndürür.</div><div class="responses"><span class="resp r200">200 OK</span></div></div>
+  </div>
+  <div class="endpoint" onclick="toggle(this)">
+    <div class="endpoint-header"><span class="method m-post">POST</span><span class="endpoint-path">/api/cards</span><span class="endpoint-summary">Kart oluştur</span><span class="chevron">▼</span></div>
     <div class="endpoint-body">
-      <div class="params-title">Request body</div>
       <table>
         <tr><th>Alan</th><th>Tip</th><th>Açıklama</th></tr>
-        <tr><td>fullName <span class="req-badge">zorunlu</span></td><td style="color:#6b7a99">string</td><td style="color:#6b7a99">Ad soyad</td></tr>
-        <tr><td>slug <span class="opt-badge">opsiyonel</span></td><td style="color:#6b7a99">string</td><td style="color:#6b7a99">URL slug (boş bırakılırsa otomatik üretilir)</td></tr>
-        <tr><td>title <span class="opt-badge">opsiyonel</span></td><td style="color:#6b7a99">string</td><td style="color:#6b7a99">Unvan</td></tr>
-        <tr><td>companyName <span class="opt-badge">opsiyonel</span></td><td style="color:#6b7a99">string</td><td style="color:#6b7a99">Şirket adı</td></tr>
-        <tr><td>email <span class="opt-badge">opsiyonel</span></td><td style="color:#6b7a99">string</td><td style="color:#6b7a99">E-posta</td></tr>
-        <tr><td>phone <span class="opt-badge">opsiyonel</span></td><td style="color:#6b7a99">string</td><td style="color:#6b7a99">Telefon</td></tr>
-        <tr><td>socialLinks <span class="opt-badge">opsiyonel</span></td><td style="color:#6b7a99">array</td><td style="color:#6b7a99">Sosyal medya linkleri</td></tr>
+        <tr><td>fullName <span class="req">zorunlu</span></td><td style="color:#5a6a8a">string</td><td style="color:#5a6a8a">Ad soyad</td></tr>
+        <tr><td>slug <span class="opt">opsiyonel</span></td><td style="color:#5a6a8a">string</td><td style="color:#5a6a8a">URL slug (otomatik üretilir)</td></tr>
+        <tr><td>title <span class="opt">opsiyonel</span></td><td style="color:#5a6a8a">string</td><td style="color:#5a6a8a">Unvan</td></tr>
+        <tr><td>email <span class="opt">opsiyonel</span></td><td style="color:#5a6a8a">string</td><td style="color:#5a6a8a">E-posta</td></tr>
+        <tr><td>socialLinks <span class="opt">opsiyonel</span></td><td style="color:#5a6a8a">array</td><td style="color:#5a6a8a">Sosyal medya linkleri</td></tr>
       </table>
       <div class="code-label">İstek örneği</div>
       <pre>{
@@ -331,124 +373,104 @@ curl -X GET \
   <span class="n">"title"</span>: <span class="s">"CEO & Founder"</span>,
   <span class="n">"companyName"</span>: <span class="s">"Paymago"</span>,
   <span class="n">"email"</span>: <span class="s">"info@paymago.com.tr"</span>,
-  <span class="n">"slug"</span>: <span class="s">"dervis-paymago"</span>,
-  <span class="n">"socialLinks"</span>: [
-    { <span class="n">"type"</span>: <span class="s">"LinkedIn"</span>, <span class="n">"url"</span>: <span class="s">"https://linkedin.com/in/..."</span>, <span class="n">"isPublic"</span>: <span class="k">true</span> }
-  ]
+  <span class="n">"slug"</span>: <span class="s">"dervis-paymago"</span>
 }</pre>
-      <div class="responses"><span class="resp resp-201">201 Created</span><span class="resp resp-400">400 Bad Request</span></div>
+      <div class="responses"><span class="resp r201">201 Created</span><span class="resp r400">400 Bad Request</span></div>
     </div>
   </div>
-
   <div class="endpoint" onclick="toggle(this)">
-    <div class="endpoint-header">
-      <span class="method m-get">GET</span>
-      <span class="endpoint-path">/api/public/{slug}</span>
-      <span class="endpoint-summary">Public profil</span>
-      <span class="chevron">▼</span>
-    </div>
+    <div class="endpoint-header"><span class="method m-get">GET</span><span class="endpoint-path">/api/public/{slug}</span><span class="endpoint-summary">Public profil</span><span class="chevron">▼</span></div>
     <div class="endpoint-body">
-      <div class="endpoint-desc">Auth gerektirmez. QR/NFC ile tarandığında açılan public profil sayfasına veri sağlar. Paylaşılan dokümanları da döndürür.</div>
-      <div class="params-title">URL parametresi</div>
-      <table><tr><th>Alan</th><th>Açıklama</th></tr><tr><td>slug</td><td style="color:#6b7a99">Kartın URL slug'ı (örn: dervis-paymago)</td></tr></table>
-      <div class="responses"><span class="resp resp-200">200 OK</span><span class="resp resp-404">404 Not Found</span></div>
+      <div class="endpoint-desc">Auth gerektirmez. QR/NFC tarandığında açılan public profil. Paylaşılan dokümanları da döndürür.</div>
+      <div class="responses"><span class="resp r200">200 OK</span><span class="resp r404">404 Not Found</span></div>
     </div>
   </div>
-
   <div class="endpoint" onclick="toggle(this)">
-    <div class="endpoint-header">
-      <span class="method m-get">GET</span>
-      <span class="endpoint-path">/api/public/{slug}/vcard</span>
-      <span class="endpoint-summary">vCard indir</span>
-      <span class="chevron">▼</span>
-    </div>
+    <div class="endpoint-header"><span class="method m-get">GET</span><span class="endpoint-path">/api/public/{slug}/vcard</span><span class="endpoint-summary">vCard indir</span><span class="chevron">▼</span></div>
     <div class="endpoint-body">
-      <div class="endpoint-desc">VCard 3.0 formatında (.vcf) kişi dosyası döndürür. Telefona doğrudan rehbere eklenebilir.</div>
-      <div class="responses"><span class="resp resp-200">200 OK · text/vcard</span></div>
+      <div class="endpoint-desc">vCard 3.0 (.vcf) formatında kişi dosyası. Telefona doğrudan rehbere eklenebilir.</div>
+      <div class="responses"><span class="resp r200">200 OK · text/vcard</span></div>
     </div>
   </div>
-</div>
+</section>
 
 <hr>
 
 <!-- LEADS -->
-<div class="section" id="leads">
-  <div class="section-title">Lead Yönetimi <span class="tag" style="background:rgba(167,139,250,0.1);color:#a78bfa">Lead</span></div>
-  <div class="section-desc">Müşteri adayı toplama, skorlama ve pipeline yönetimi.</div>
-
+<section class="section" id="leads">
+  <div class="section-header">
+    <div class="section-title">Lead Yönetimi <span class="tag" style="background:rgba(167,139,250,0.1);color:#a78bfa">Lead</span></div>
+    <div class="section-desc">Müşteri adayı toplama, skorlama ve pipeline yönetimi.</div>
+  </div>
   <div class="endpoint" onclick="toggle(this)">
-    <div class="endpoint-header">
-      <span class="method m-post">POST</span>
-      <span class="endpoint-path">/api/public/{slug}/lead</span>
-      <span class="endpoint-summary">Lead formu gönder</span>
-      <span class="chevron">▼</span>
-    </div>
+    <div class="endpoint-header"><span class="method m-post">POST</span><span class="endpoint-path">/api/public/{slug}/lead</span><span class="endpoint-summary">Lead formu</span><span class="chevron">▼</span></div>
     <div class="endpoint-body">
       <div class="endpoint-desc">Public profil üzerinden lead oluşturur. En az bir alan (fullName, email veya phone) zorunludur.</div>
-      <div class="code-label">İstek örneği</div>
+      <div class="code-label">İstek</div>
       <pre>{
   <span class="n">"fullName"</span>: <span class="s">"Ahmet Çelik"</span>,
   <span class="n">"email"</span>: <span class="s">"ahmet@firma.com"</span>,
-  <span class="n">"phone"</span>: <span class="s">"+90 533 100 11 22"</span>,
   <span class="n">"company"</span>: <span class="s">"Firma A.Ş."</span>,
   <span class="n">"consentKvkk"</span>: <span class="k">true</span>
 }</pre>
-      <div class="responses"><span class="resp resp-201">201 Created</span><span class="resp resp-400">400 Bad Request</span></div>
+      <div class="responses"><span class="resp r201">201 Created</span><span class="resp r400">400 Bad Request</span></div>
     </div>
   </div>
-
   <div class="endpoint" onclick="toggle(this)">
-    <div class="endpoint-header">
-      <span class="method m-get">GET</span>
-      <span class="endpoint-path">/api/leads/pipeline</span>
-      <span class="endpoint-summary">Pipeline görünümü</span>
-      <span class="chevron">▼</span>
-    </div>
+    <div class="endpoint-header"><span class="method m-get">GET</span><span class="endpoint-path">/api/leads</span><span class="endpoint-summary">Lead listesi</span><span class="chevron">▼</span></div>
+    <div class="endpoint-body"><div class="endpoint-desc">?status=Hot gibi filtreyle çekilebilir.</div><div class="responses"><span class="resp r200">200 OK</span></div></div>
+  </div>
+  <div class="endpoint" onclick="toggle(this)">
+    <div class="endpoint-header"><span class="method m-get">GET</span><span class="endpoint-path">/api/leads/pipeline</span><span class="endpoint-summary">Pipeline görünümü</span><span class="chevron">▼</span></div>
     <div class="endpoint-body">
-      <div class="endpoint-desc">Lead'leri statüsüne göre gruplar, her grup için sayı ve ortalama skor döndürür.</div>
+      <div class="endpoint-desc">Statüse göre gruplar, sayı ve ortalama skor döndürür.</div>
       <div class="code-label">Yanıt</div>
-      <pre>[
-  { <span class="n">"status"</span>: <span class="s">"Hot"</span>, <span class="n">"count"</span>: <span class="b">4</span>, <span class="n">"avgScore"</span>: <span class="b">85.2</span> },
-  { <span class="n">"status"</span>: <span class="s">"New"</span>, <span class="n">"count"</span>: <span class="b">12</span>, <span class="n">"avgScore"</span>: <span class="b">52.0</span> }
-]</pre>
-      <div class="responses"><span class="resp resp-200">200 OK</span></div>
+      <pre>[{ <span class="n">"status"</span>: <span class="s">"Hot"</span>, <span class="n">"count"</span>: <span class="b">4</span>, <span class="n">"avgScore"</span>: <span class="b">85.2</span> }]</pre>
+      <div class="responses"><span class="resp r200">200 OK</span></div>
     </div>
   </div>
-</div>
+  <div class="endpoint" onclick="toggle(this)">
+    <div class="endpoint-header"><span class="method m-post">POST</span><span class="endpoint-path">/api/leads/{id}/status</span><span class="endpoint-summary">Statü güncelle</span><span class="chevron">▼</span></div>
+    <div class="endpoint-body">
+      <div class="code-label">İstek</div>
+      <pre>{ <span class="n">"status"</span>: <span class="s">"Hot"</span>, <span class="n">"score"</span>: <span class="b">85</span> }</pre>
+      <div class="responses"><span class="resp r200">200 OK</span></div>
+    </div>
+  </div>
+</section>
 
 <hr>
 
 <!-- EVENTS -->
-<div class="section" id="events">
-  <div class="section-title">Event Collector <span class="tag" style="background:rgba(251,146,60,0.1);color:#fb923c">Events</span></div>
-  <div class="section-desc">40+ event tipi destekleyen first-party engagement data platformu. KVKK uyumlu, AI skorlama ile zenginleştirilmiş.</div>
-
-  <div class="endpoint" onclick="toggle(this)">
-    <div class="endpoint-header">
-      <span class="method m-post">POST</span>
-      <span class="endpoint-path">/api/events/collect</span>
-      <span class="endpoint-summary">Tekil event gönder</span>
-      <span class="chevron">▼</span>
+<section class="section" id="events">
+  <div class="section-header">
+    <div class="section-title">Event Collector <span class="tag" style="background:rgba(251,146,60,0.1);color:#fb923c">Events</span></div>
+    <div class="section-desc">40+ event tipi destekleyen first-party engagement data platformu.</div>
+  </div>
+  <div class="alert warning">
+    <div class="alert-icon">⚠</div>
+    <div class="alert-body">
+      <div class="alert-title">KVKK Uyumu — Kişisel Veri Event'leri</div>
+      <div class="alert-text">lead_form_submitted, kyc_verified, crm_lead_created gibi kişisel veri içeren event'lerde consentGiven: true zorunludur. Aksi halde 400 döner.</div>
     </div>
+  </div>
+  <div class="endpoint" onclick="toggle(this)">
+    <div class="endpoint-header"><span class="method m-post">POST</span><span class="endpoint-path">/api/events/collect</span><span class="endpoint-summary">Tekil event</span><span class="chevron">▼</span></div>
     <div class="endpoint-body">
-      <div class="params-title">Request body</div>
       <table>
         <tr><th>Alan</th><th>Tip</th><th>Açıklama</th></tr>
-        <tr><td>tenantId <span class="req-badge">zorunlu</span></td><td style="color:#6b7a99">string</td><td style="color:#6b7a99">Organizasyon kimliği</td></tr>
-        <tr><td>eventName <span class="req-badge">zorunlu</span></td><td style="color:#6b7a99">string</td><td style="color:#6b7a99">Event tipi (bkz: desteklenen eventler)</td></tr>
-        <tr><td>consentGiven <span class="req-badge">zorunlu</span></td><td style="color:#6b7a99">boolean</td><td style="color:#6b7a99">Kişisel veri eventi için true zorunlu</td></tr>
-        <tr><td>source <span class="opt-badge">opsiyonel</span></td><td style="color:#6b7a99">string</td><td style="color:#6b7a99">dijimago_profile, dijimago_web, external...</td></tr>
-        <tr><td>properties <span class="opt-badge">opsiyonel</span></td><td style="color:#6b7a99">object</td><td style="color:#6b7a99">Serbest key-value metadata</td></tr>
+        <tr><td>tenantId <span class="req">zorunlu</span></td><td style="color:#5a6a8a">string</td><td style="color:#5a6a8a">Organizasyon ID</td></tr>
+        <tr><td>eventName <span class="req">zorunlu</span></td><td style="color:#5a6a8a">string</td><td style="color:#5a6a8a">Event tipi</td></tr>
+        <tr><td>consentGiven <span class="req">zorunlu</span></td><td style="color:#5a6a8a">boolean</td><td style="color:#5a6a8a">Kişisel veri için true şart</td></tr>
+        <tr><td>source <span class="opt">opsiyonel</span></td><td style="color:#5a6a8a">string</td><td style="color:#5a6a8a">dijimago_profile, external...</td></tr>
+        <tr><td>properties <span class="opt">opsiyonel</span></td><td style="color:#5a6a8a">object</td><td style="color:#5a6a8a">Serbest metadata</td></tr>
       </table>
       <div class="code-label">Desteklenen event kategorileri</div>
       <pre><span class="c">// Digital Identity</span>
 profile_viewed, qr_scanned, nfc_tapped, profile_shared
 
-<span class="c">// Lead</span>
-lead_form_submitted, lead_form_started, lead_form_abandoned
-
-<span class="c">// CRM</span>
-crm_lead_created, crm_task_created, crm_meeting_scheduled
+<span class="c">// Lead & CRM</span>
+lead_form_submitted, crm_lead_created, crm_task_created
 
 <span class="c">// Payment</span>
 payment_link_clicked, payment_completed, payment_failed
@@ -457,62 +479,110 @@ payment_link_clicked, payment_completed, payment_failed
 ecommerce_cart_created, ecommerce_order_completed, ecommerce_cart_abandoned
 
 <span class="c">// Dealer</span>
-dealer_payment_started, dealer_risk_flagged, dealer_limit_exceeded
+dealer_payment_started, dealer_risk_flagged
+
+<span class="c">// Security / KYC</span>
+kyc_verified, fraud_risk_detected, anomaly_detected
 
 <span class="c">// AI</span>
 ai_score_generated, ai_recommendation_created</pre>
-      <div class="code-label">Yanıt (lead_form_submitted için otomatik lead oluşturulur)</div>
+      <div class="code-label">Yanıt</div>
       <pre>{
   <span class="n">"eventId"</span>: <span class="s">"uuid"</span>,
-  <span class="n">"aiScoreHint"</span>: <span class="s">"hot"</span>,   <span class="c">// hot | warm | cold | converted | at_risk</span>
-  <span class="n">"linkedLeadId"</span>: <span class="s">"uuid"</span>,  <span class="c">// otomatik lead oluşturulduysa</span>
+  <span class="n">"aiScoreHint"</span>: <span class="s">"hot"</span>,    <span class="c">// hot | warm | cold | converted | at_risk</span>
+  <span class="n">"linkedLeadId"</span>: <span class="s">"uuid"</span>,  <span class="c">// lead_form_submitted için otomatik oluşur</span>
   <span class="n">"isKnownSchema"</span>: <span class="k">true</span>
 }</pre>
-      <div class="responses"><span class="resp resp-201">201 Created</span><span class="resp resp-400">400 Consent Required</span></div>
+      <div class="responses"><span class="resp r201">201 Created</span><span class="resp r400">400 Consent Required</span></div>
     </div>
   </div>
-
   <div class="endpoint" onclick="toggle(this)">
-    <div class="endpoint-header">
-      <span class="method m-post">POST</span>
-      <span class="endpoint-path">/api/events/batch</span>
-      <span class="endpoint-summary">Toplu event gönder</span>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="endpoint-body">
-      <div class="endpoint-desc">Tek seferde maksimum 100 event gönderilir. Sayfa görüntüleme, tıklama gibi yüksek hacimli event'ler için kullanılır.</div>
-      <div class="responses"><span class="resp resp-200">200 OK</span><span class="resp resp-400">400 Bad Request</span></div>
-    </div>
+    <div class="endpoint-header"><span class="method m-post">POST</span><span class="endpoint-path">/api/events/batch</span><span class="endpoint-summary">Toplu event (max 100)</span><span class="chevron">▼</span></div>
+    <div class="endpoint-body"><div class="endpoint-desc">Tek seferde max 100 event. Sayfa görüntüleme gibi yüksek hacimli event'ler için.</div><div class="responses"><span class="resp r200">200 OK</span></div></div>
   </div>
-
   <div class="endpoint" onclick="toggle(this)">
-    <div class="endpoint-header">
-      <span class="method m-get">GET</span>
-      <span class="endpoint-path">/api/events/analytics</span>
-      <span class="endpoint-summary">Event analitiği</span>
-      <span class="chevron">▼</span>
-    </div>
+    <div class="endpoint-header"><span class="method m-get">GET</span><span class="endpoint-path">/api/events/analytics</span><span class="endpoint-summary">Analitik özet</span><span class="chevron">▼</span></div>
+    <div class="endpoint-body"><div class="endpoint-desc">Kaynak dağılımı, saatlik dağılım, KVKK onay oranı.</div><div class="responses"><span class="resp r200">200 OK</span></div></div>
+  </div>
+  <div class="endpoint" onclick="toggle(this)">
+    <div class="endpoint-header"><span class="method m-get">GET</span><span class="endpoint-path">/api/events/schema</span><span class="endpoint-summary">Event şeması</span><span class="chevron">▼</span></div>
+    <div class="endpoint-body"><div class="endpoint-desc">Tüm desteklenen event tiplerini kategorilere göre döndürür.</div><div class="responses"><span class="resp r200">200 OK</span></div></div>
+  </div>
+</section>
+
+<hr>
+
+<!-- DOCS -->
+<section class="section" id="docs">
+  <div class="section-header">
+    <div class="section-title">Dokümanlar <span class="tag" style="background:rgba(96,165,250,0.1);color:#60a5fa">Docs</span></div>
+    <div class="section-desc">Teklif, sunum ve resmi evrak yönetimi. Güvenli paylaşım linkleri.</div>
+  </div>
+  <div class="endpoint" onclick="toggle(this)">
+    <div class="endpoint-header"><span class="method m-post">POST</span><span class="endpoint-path">/api/docs</span><span class="endpoint-summary">Doküman oluştur</span><span class="chevron">▼</span></div>
     <div class="endpoint-body">
-      <div class="endpoint-desc">Toplam event sayısı, kaynak dağılımı, saatlik dağılım ve KVKK onay oranı döndürür.</div>
-      <div class="responses"><span class="resp resp-200">200 OK</span></div>
+      <div class="code-label">İstek</div>
+      <pre>{ <span class="n">"title"</span>: <span class="s">"Teklif Dosyası"</span>, <span class="n">"category"</span>: <span class="s">"Offer"</span>, <span class="n">"isPublic"</span>: <span class="k">true</span> }</pre>
+      <div class="responses"><span class="resp r201">201 Created</span></div>
     </div>
   </div>
-</div>
+  <div class="endpoint" onclick="toggle(this)">
+    <div class="endpoint-header"><span class="method m-post">POST</span><span class="endpoint-path">/api/docs/{id}/share</span><span class="endpoint-summary">Paylaşım linki oluştur</span><span class="chevron">▼</span></div>
+    <div class="endpoint-body">
+      <div class="code-label">İstek</div>
+      <pre>{ <span class="n">"allowDownload"</span>: <span class="k">true</span>, <span class="n">"maxViews"</span>: <span class="b">10</span>, <span class="n">"expiresAt"</span>: <span class="s">"2026-06-01T00:00:00Z"</span> }</pre>
+      <div class="responses"><span class="resp r201">201 Created</span></div>
+    </div>
+  </div>
+  <div class="endpoint" onclick="toggle(this)">
+    <div class="endpoint-header"><span class="method m-get">GET</span><span class="endpoint-path">/api/docs/share/{token}</span><span class="endpoint-summary">Paylaşılan dokümanı aç</span><span class="chevron">▼</span></div>
+    <div class="endpoint-body"><div class="endpoint-desc">Token geçerlilik, görüntüleme limiti ve süre kontrolü yapar. Auth gerektirmez.</div><div class="responses"><span class="resp r200">200 OK</span><span class="resp r404">404 Not Found</span></div></div>
+  </div>
+</section>
+
+<hr>
+
+<!-- ENGAGE -->
+<section class="section" id="engage">
+  <div class="section-header">
+    <div class="section-title">Engage & CRM <span class="tag" style="background:rgba(52,211,153,0.1);color:#34d399">Engage</span></div>
+    <div class="section-desc">Engagement sinyalleri, segment analizi ve CRM entegrasyonu.</div>
+  </div>
+  <div class="endpoint" onclick="toggle(this)">
+    <div class="endpoint-header"><span class="method m-get">GET</span><span class="endpoint-path">/api/engage/signals</span><span class="endpoint-summary">Son sinyaller</span><span class="chevron">▼</span></div>
+    <div class="endpoint-body"><div class="endpoint-desc">Son 50 engagement sinyalini döndürür.</div><div class="responses"><span class="resp r200">200 OK</span></div></div>
+  </div>
+  <div class="endpoint" onclick="toggle(this)">
+    <div class="endpoint-header"><span class="method m-post">POST</span><span class="endpoint-path">/api/engage/followup-suggestion</span><span class="endpoint-summary">Takip önerisi</span><span class="chevron">▼</span></div>
+    <div class="endpoint-body">
+      <div class="code-label">İstek</div>
+      <pre>{ <span class="n">"leadId"</span>: <span class="s">"uuid"</span>, <span class="n">"signalType"</span>: <span class="s">"offer_opened"</span> }</pre>
+      <div class="responses"><span class="resp r200">200 OK</span></div>
+    </div>
+  </div>
+  <div class="endpoint" onclick="toggle(this)">
+    <div class="endpoint-header"><span class="method m-post">POST</span><span class="endpoint-path">/api/engage/create-crm-task</span><span class="endpoint-summary">CRM görevi oluştur</span><span class="chevron">▼</span></div>
+    <div class="endpoint-body"><div class="endpoint-desc">Paymago CRM entegrasyonu (stub). Production'da HttpClient ile gerçek CRM API'ye bağlanır.</div><div class="responses"><span class="resp r200">200 OK</span></div></div>
+  </div>
+</section>
 
 <hr>
 
 <!-- AI -->
-<div class="section" id="ai">
-  <div class="section-title">AI Endpoints <span class="tag" style="background:rgba(52,211,153,0.1);color:#34d399">AI</span></div>
-  <div class="section-desc">Tüm AI yanıtlarında <code style="background:#111620;padding:2px 6px;border-radius:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;">decisionType: "advisory"</code> alanı bulunur — AI nihai karar vermez, karar desteği sunar. KVKK uyumu açısından kritiktir.</div>
-
-  <div class="endpoint" onclick="toggle(this)">
-    <div class="endpoint-header">
-      <span class="method m-post">POST</span>
-      <span class="endpoint-path">/api/ai/lead-score</span>
-      <span class="endpoint-summary">Lead skoru hesapla</span>
-      <span class="chevron">▼</span>
+<section class="section" id="ai">
+  <div class="section-header">
+    <div class="section-title">AI Endpoints <span class="tag" style="background:rgba(52,211,153,0.1);color:#34d399">AI</span></div>
+    <div class="section-desc">Skorlama, risk değerlendirme ve yönetici özetleri.</div>
+  </div>
+  <div class="alert advisory">
+    <div class="alert-icon">⚖</div>
+    <div class="alert-body">
+      <div class="alert-title">Hukuki Uyum — decisionType: "advisory"</div>
+      <div class="alert-text">Tüm AI yanıtlarında decisionType: "advisory" alanı bulunur. Bu, AI'ın nihai karar vermediğini, yalnızca karar desteği sunduğunu belirtir. KVKK ve AB AI Act uyumu için zorunludur. Son karar her zaman yetkili bir insan tarafından verilmelidir.</div>
     </div>
+  </div>
+  <div class="endpoint" onclick="toggle(this)">
+    <div class="endpoint-header"><span class="method m-post">POST</span><span class="endpoint-path">/api/ai/lead-score</span><span class="endpoint-summary">Lead skoru hesapla</span><span class="chevron">▼</span></div>
     <div class="endpoint-body">
       <div class="code-label">İstek</div>
       <pre>{ <span class="n">"leadId"</span>: <span class="s">"uuid"</span> }</pre>
@@ -521,266 +591,203 @@ ai_score_generated, ai_recommendation_created</pre>
   <span class="n">"score"</span>: <span class="b">82</span>,
   <span class="n">"level"</span>: <span class="s">"hot"</span>,           <span class="c">// hot | warm | cold</span>
   <span class="n">"recommendation"</span>: <span class="s">"24 saat içinde takip önerilir."</span>,
-  <span class="n">"explanation"</span>: <span class="s">"..."</span>,
   <span class="n">"decisionType"</span>: <span class="s">"advisory"</span>
 }</pre>
-      <div class="responses"><span class="resp resp-200">200 OK</span></div>
+      <div class="responses"><span class="resp r200">200 OK</span></div>
     </div>
   </div>
-
   <div class="endpoint" onclick="toggle(this)">
-    <div class="endpoint-header">
-      <span class="method m-post">POST</span>
-      <span class="endpoint-path">/api/ai/dealer-risk-score</span>
-      <span class="endpoint-summary">Bayi risk skoru</span>
-      <span class="chevron">▼</span>
-    </div>
+    <div class="endpoint-header"><span class="method m-post">POST</span><span class="endpoint-path">/api/ai/dealer-risk-score</span><span class="endpoint-summary">Bayi risk skoru</span><span class="chevron">▼</span></div>
     <div class="endpoint-body">
       <div class="code-label">İstek</div>
       <pre>{ <span class="n">"dealerId"</span>: <span class="s">"BAY-001"</span>, <span class="n">"overdueDays"</span>: <span class="b">45</span> }</pre>
-      <div class="code-label">Yanıt</div>
-      <pre>{
-  <span class="n">"riskLevel"</span>: <span class="s">"medium"</span>,  <span class="c">// high (>60 gün) | medium (>30) | low</span>
-  <span class="n">"recommendation"</span>: <span class="s">"..."</span>,
-  <span class="n">"decisionType"</span>: <span class="s">"advisory"</span>
-}</pre>
-      <div class="responses"><span class="resp resp-200">200 OK</span></div>
-    </div>
-  </div>
-
-  <div class="endpoint" onclick="toggle(this)">
-    <div class="endpoint-header">
-      <span class="method m-post">POST</span>
-      <span class="endpoint-path">/api/ai/payment-risk</span>
-      <span class="endpoint-summary">Ödeme riski değerlendir</span>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="endpoint-body">
-      <div class="code-label">İstek</div>
-      <pre>{ <span class="n">"paymentId"</span>: <span class="s">"PAY-001"</span>, <span class="n">"amount"</span>: <span class="b">75000</span> }</pre>
       <div class="code-label">Risk eşikleri</div>
-      <pre><span class="c">amount > 50.000 TRY  → high</span>
-<span class="c">amount > 10.000 TRY  → medium</span>
-<span class="c">amount ≤ 10.000 TRY  → low</span></pre>
-      <div class="responses"><span class="resp resp-200">200 OK</span></div>
+      <pre><span class="c">overdueDays > 60  →  high
+overdueDays > 30  →  medium
+overdueDays ≤ 30  →  low</span></pre>
+      <div class="responses"><span class="resp r200">200 OK</span></div>
     </div>
   </div>
-
   <div class="endpoint" onclick="toggle(this)">
-    <div class="endpoint-header">
-      <span class="method m-get">GET</span>
-      <span class="endpoint-path">/api/ai/management-summary</span>
-      <span class="endpoint-summary">Yönetim özeti</span>
-      <span class="chevron">▼</span>
-    </div>
+    <div class="endpoint-header"><span class="method m-post">POST</span><span class="endpoint-path">/api/ai/payment-risk</span><span class="endpoint-summary">Ödeme riski</span><span class="chevron">▼</span></div>
     <div class="endpoint-body">
-      <div class="endpoint-desc">Toplam lead sayısı, sıcak lead'ler, ortalama skor ve önerilen aksiyonları döndürür.</div>
-      <div class="responses"><span class="resp resp-200">200 OK</span></div>
+      <div class="code-label">Risk eşikleri</div>
+      <pre><span class="c">amount > 50.000 TRY  →  high   (manuel onay önerilir)
+amount > 10.000 TRY  →  medium
+amount ≤ 10.000 TRY  →  low</span></pre>
+      <div class="responses"><span class="resp r200">200 OK</span></div>
     </div>
   </div>
-</div>
+  <div class="endpoint" onclick="toggle(this)">
+    <div class="endpoint-header"><span class="method m-get">GET</span><span class="endpoint-path">/api/ai/management-summary</span><span class="endpoint-summary">Yönetim özeti</span><span class="chevron">▼</span></div>
+    <div class="endpoint-body"><div class="endpoint-desc">Toplam lead, sıcak lead sayısı, ortalama skor ve önerilen aksiyonlar.</div><div class="responses"><span class="resp r200">200 OK</span></div></div>
+  </div>
+  <div class="endpoint" onclick="toggle(this)">
+    <div class="endpoint-header"><span class="method m-get">GET</span><span class="endpoint-path">/api/ai/recommendations</span><span class="endpoint-summary">AI önerileri</span><span class="chevron">▼</span></div>
+    <div class="endpoint-body"><div class="endpoint-desc">Sıcak lead takipleri, sepet kurtarma kampanyası gibi aksiyonlar. Tümünde decisionType: advisory.</div><div class="responses"><span class="resp r200">200 OK</span></div></div>
+  </div>
+</section>
 
 <hr>
 
 <!-- PAYMENT -->
-<div class="section" id="payment">
-  <div class="section-title">Payment Events <span class="tag" style="background:rgba(251,146,60,0.1);color:#fb923c">Payment</span></div>
-  <div class="section-desc">Ödeme link yaşam döngüsü takibi.</div>
-
-  <div class="endpoint" onclick="toggle(this)">
-    <div class="endpoint-header">
-      <span class="method m-post">POST</span>
-      <span class="endpoint-path">/api/payment-events/link-created</span>
-      <span class="endpoint-summary">Ödeme linki oluşturuldu</span>
-      <span class="chevron">▼</span>
+<section class="section" id="payment">
+  <div class="section-header">
+    <div class="section-title">Payment Events <span class="tag" style="background:rgba(251,146,60,0.1);color:#fb923c">Payment</span></div>
+    <div class="section-desc">Ödeme link yaşam döngüsü takibi.</div>
+  </div>
+  <div class="alert info">
+    <div class="alert-icon">ℹ</div>
+    <div class="alert-body">
+      <div class="alert-title">Ödeme Event Akışı</div>
+      <div class="alert-text">Önerilen sıra: link-created → link-clicked → payment-completed veya payment-failed. Her adım ayrı event olarak kaydedilir, summary endpoint'inden toplam gelir takip edilebilir.</div>
     </div>
+  </div>
+  <div class="endpoint" onclick="toggle(this)">
+    <div class="endpoint-header"><span class="method m-post">POST</span><span class="endpoint-path">/api/payment-events/link-created</span><span class="endpoint-summary">Link oluşturuldu</span><span class="chevron">▼</span></div>
     <div class="endpoint-body">
       <div class="code-label">İstek</div>
       <pre>{ <span class="n">"paymentId"</span>: <span class="s">"PAY-001"</span>, <span class="n">"amount"</span>: <span class="b">15000</span>, <span class="n">"currency"</span>: <span class="s">"TRY"</span> }</pre>
-      <div class="responses"><span class="resp resp-201">201 Created</span></div>
+      <div class="responses"><span class="resp r201">201 Created</span></div>
     </div>
   </div>
-
   <div class="endpoint" onclick="toggle(this)">
-    <div class="endpoint-header">
-      <span class="method m-get">GET</span>
-      <span class="endpoint-path">/api/payment-events/summary</span>
-      <span class="endpoint-summary">Ödeme özeti</span>
-      <span class="chevron">▼</span>
-    </div>
+    <div class="endpoint-header"><span class="method m-post">POST</span><span class="endpoint-path">/api/payment-events/payment-completed</span><span class="endpoint-summary">Ödeme tamamlandı</span><span class="chevron">▼</span></div>
+    <div class="endpoint-body"><div class="responses"><span class="resp r201">201 Created</span></div></div>
+  </div>
+  <div class="endpoint" onclick="toggle(this)">
+    <div class="endpoint-header"><span class="method m-post">POST</span><span class="endpoint-path">/api/payment-events/payment-failed</span><span class="endpoint-summary">Ödeme başarısız</span><span class="chevron">▼</span></div>
+    <div class="endpoint-body"><div class="responses"><span class="resp r201">201 Created</span></div></div>
+  </div>
+  <div class="endpoint" onclick="toggle(this)">
+    <div class="endpoint-header"><span class="method m-get">GET</span><span class="endpoint-path">/api/payment-events/summary</span><span class="endpoint-summary">Ödeme özeti</span><span class="chevron">▼</span></div>
     <div class="endpoint-body">
       <div class="code-label">Yanıt</div>
-      <pre>{
-  <span class="n">"total"</span>: <span class="b">24</span>,
-  <span class="n">"completed"</span>: <span class="b">18</span>,
-  <span class="n">"failed"</span>: <span class="b">4</span>,
-  <span class="n">"clicked"</span>: <span class="b">22</span>,
-  <span class="n">"totalAmount"</span>: <span class="b">270000</span>
-}</pre>
-      <div class="responses"><span class="resp resp-200">200 OK</span></div>
+      <pre>{ <span class="n">"completed"</span>: <span class="b">18</span>, <span class="n">"failed"</span>: <span class="b">4</span>, <span class="n">"totalAmount"</span>: <span class="b">270000</span> }</pre>
+      <div class="responses"><span class="resp r200">200 OK</span></div>
     </div>
   </div>
-</div>
+</section>
 
 <hr>
 
 <!-- DEALER -->
-<div class="section" id="dealer">
-  <div class="section-title">Dealer Events <span class="tag" style="background:rgba(244,114,182,0.1);color:#f472b6">Dealer</span></div>
-  <div class="section-desc">Bayi tahsilat süreçleri ve risk skorlaması.</div>
-
-  <div class="endpoint" onclick="toggle(this)">
-    <div class="endpoint-header">
-      <span class="method m-post">POST</span>
-      <span class="endpoint-path">/api/dealer-events/collection-overdue</span>
-      <span class="endpoint-summary">Tahsilat gecikti</span>
-      <span class="chevron">▼</span>
+<section class="section" id="dealer">
+  <div class="section-header">
+    <div class="section-title">Dealer Events <span class="tag" style="background:rgba(244,114,182,0.1);color:#f472b6">Dealer</span></div>
+    <div class="section-desc">Bayi tahsilat süreçleri ve risk skorlaması.</div>
+  </div>
+  <div class="alert warning">
+    <div class="alert-icon">⚠</div>
+    <div class="alert-body">
+      <div class="alert-title">Risk Skorlama Mantığı</div>
+      <div class="alert-text">Aynı dealerId için 4+ collection-overdue event → high risk. 2-3 event → medium. 0-1 event → low. Risk seviyesi /api/dealer-risk/scores endpoint'inden sorgulanabilir.</div>
     </div>
+  </div>
+  <div class="endpoint" onclick="toggle(this)">
+    <div class="endpoint-header"><span class="method m-post">POST</span><span class="endpoint-path">/api/dealer-events/collection-overdue</span><span class="endpoint-summary">Tahsilat gecikti</span><span class="chevron">▼</span></div>
     <div class="endpoint-body">
       <div class="code-label">İstek</div>
       <pre>{ <span class="n">"dealerId"</span>: <span class="s">"BAY-001"</span>, <span class="n">"amount"</span>: <span class="b">30000</span>, <span class="n">"daysOverdue"</span>: <span class="b">75</span> }</pre>
-      <div class="responses"><span class="resp resp-201">201 Created</span></div>
+      <div class="responses"><span class="resp r201">201 Created</span></div>
     </div>
   </div>
-
   <div class="endpoint" onclick="toggle(this)">
-    <div class="endpoint-header">
-      <span class="method m-get">GET</span>
-      <span class="endpoint-path">/api/dealer-risk/scores</span>
-      <span class="endpoint-summary">Bayi risk skorları</span>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="endpoint-body">
-      <div class="endpoint-desc">4+ overdue event → high risk, 2-3 → medium, 0-1 → low</div>
-      <div class="responses"><span class="resp resp-200">200 OK</span></div>
-    </div>
+    <div class="endpoint-header"><span class="method m-get">GET</span><span class="endpoint-path">/api/dealer-risk/scores</span><span class="endpoint-summary">Risk skorları</span><span class="chevron">▼</span></div>
+    <div class="endpoint-body"><div class="responses"><span class="resp r200">200 OK</span></div></div>
   </div>
-
   <div class="endpoint" onclick="toggle(this)">
-    <div class="endpoint-header">
-      <span class="method m-get">GET</span>
-      <span class="endpoint-path">/api/dealers/{id}/timeline</span>
-      <span class="endpoint-summary">Bayi zaman çizelgesi</span>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="endpoint-body">
-      <div class="endpoint-desc">Belirli bir bayi'nin tüm tahsilat event'lerini kronolojik sırada döndürür.</div>
-      <div class="responses"><span class="resp resp-200">200 OK</span></div>
-    </div>
+    <div class="endpoint-header"><span class="method m-get">GET</span><span class="endpoint-path">/api/dealers/{id}/timeline</span><span class="endpoint-summary">Bayi zaman çizelgesi</span><span class="chevron">▼</span></div>
+    <div class="endpoint-body"><div class="endpoint-desc">Belirli bir bayi'nin tüm event'lerini kronolojik sırada döndürür.</div><div class="responses"><span class="resp r200">200 OK</span></div></div>
   </div>
-</div>
+</section>
 
 <hr>
 
 <!-- COMMERCE -->
-<div class="section" id="commerce">
-  <div class="section-title">Commerce Events <span class="tag" style="background:rgba(96,165,250,0.1);color:#60a5fa">Commerce</span></div>
-  <div class="section-desc">E-ticaret funnel takibi — görüntülemeden siparişe.</div>
-
+<section class="section" id="commerce">
+  <div class="section-header">
+    <div class="section-title">Commerce Events <span class="tag" style="background:rgba(96,165,250,0.1);color:#60a5fa">Commerce</span></div>
+    <div class="section-desc">E-ticaret funnel takibi — görüntülemeden siparişe.</div>
+  </div>
   <div class="endpoint" onclick="toggle(this)">
-    <div class="endpoint-header">
-      <span class="method m-post">POST</span>
-      <span class="endpoint-path">/api/commerce-events/cart-abandoned</span>
-      <span class="endpoint-summary">Sepet terk edildi</span>
-      <span class="chevron">▼</span>
-    </div>
+    <div class="endpoint-header"><span class="method m-post">POST</span><span class="endpoint-path">/api/commerce-events/cart-abandoned</span><span class="endpoint-summary">Sepet terk edildi</span><span class="chevron">▼</span></div>
     <div class="endpoint-body">
       <div class="code-label">İstek</div>
       <pre>{ <span class="n">"sessionId"</span>: <span class="s">"sess_abc"</span>, <span class="n">"productId"</span>: <span class="s">"CRM-PRO"</span>, <span class="n">"amount"</span>: <span class="b">1200</span> }</pre>
-      <div class="responses"><span class="resp resp-201">201 Created</span></div>
+      <div class="responses"><span class="resp r201">201 Created</span></div>
     </div>
   </div>
-
   <div class="endpoint" onclick="toggle(this)">
-    <div class="endpoint-header">
-      <span class="method m-get">GET</span>
-      <span class="endpoint-path">/api/commerce-events/summary</span>
-      <span class="endpoint-summary">Commerce özeti</span>
-      <span class="chevron">▼</span>
-    </div>
+    <div class="endpoint-header"><span class="method m-post">POST</span><span class="endpoint-path">/api/commerce-events/order-completed</span><span class="endpoint-summary">Sipariş tamamlandı</span><span class="chevron">▼</span></div>
+    <div class="endpoint-body"><div class="responses"><span class="resp r201">201 Created</span></div></div>
+  </div>
+  <div class="endpoint" onclick="toggle(this)">
+    <div class="endpoint-header"><span class="method m-get">GET</span><span class="endpoint-path">/api/commerce-events/summary</span><span class="endpoint-summary">Commerce özeti</span><span class="chevron">▼</span></div>
     <div class="endpoint-body">
       <div class="code-label">Yanıt</div>
-      <pre>{
-  <span class="n">"productViews"</span>: <span class="b">142</span>,
-  <span class="n">"cartsCreated"</span>: <span class="b">38</span>,
-  <span class="n">"cartsAbandoned"</span>: <span class="b">21</span>,
-  <span class="n">"ordersCompleted"</span>: <span class="b">17</span>,
-  <span class="n">"totalRevenue"</span>: <span class="b">45600</span>
-}</pre>
-      <div class="responses"><span class="resp resp-200">200 OK</span></div>
+      <pre>{ <span class="n">"ordersCompleted"</span>: <span class="b">17</span>, <span class="n">"cartsAbandoned"</span>: <span class="b">21</span>, <span class="n">"totalRevenue"</span>: <span class="b">45600</span> }</pre>
+      <div class="responses"><span class="resp r200">200 OK</span></div>
     </div>
   </div>
-</div>
+</section>
 
 <hr>
 
 <!-- KVKK -->
-<div class="section" id="kvkk">
-  <div class="section-title">KVKK / Consent <span class="tag" style="background:rgba(167,139,250,0.1);color:#a78bfa">KVKK</span></div>
-  <div class="section-desc">KVKK Madde 7 uyumlu rıza yönetimi, veri silme ve anonimleştirme.</div>
-
-  <div class="endpoint" onclick="toggle(this)">
-    <div class="endpoint-header">
-      <span class="method m-post">POST</span>
-      <span class="endpoint-path">/api/consents</span>
-      <span class="endpoint-summary">Onay kaydet</span>
-      <span class="chevron">▼</span>
+<section class="section" id="kvkk">
+  <div class="section-header">
+    <div class="section-title">KVKK / Consent <span class="tag" style="background:rgba(167,139,250,0.1);color:#a78bfa">KVKK</span></div>
+    <div class="section-desc">KVKK Madde 7 uyumlu rıza yönetimi, veri silme ve anonimleştirme.</div>
+  </div>
+  <div class="alert kvkk">
+    <div class="alert-icon">⚖</div>
+    <div class="alert-body">
+      <div class="alert-title">KVKK Madde 7 — Veri Saklama ve İmha</div>
+      <div class="alert-text">Veri silme (delete) geri alınamaz. Anonimleştirme (anonymize) tercih edilebilir bir alternatiftir; istatistiksel veriler korunurken kişisel bilgiler anonim hale getirilir. Her iki işlem de audit log'a otomatik kaydedilmelidir.</div>
     </div>
+  </div>
+  <div class="endpoint" onclick="toggle(this)">
+    <div class="endpoint-header"><span class="method m-post">POST</span><span class="endpoint-path">/api/consents</span><span class="endpoint-summary">Onay kaydet</span><span class="chevron">▼</span></div>
     <div class="endpoint-body">
       <div class="code-label">İstek</div>
       <pre>{
   <span class="n">"subjectId"</span>: <span class="s">"kullanici@email.com"</span>,
-  <span class="n">"consentType"</span>: <span class="s">"kvkk"</span>,  <span class="c">// kvkk | marketing | analytics</span>
+  <span class="n">"consentType"</span>: <span class="s">"kvkk"</span>,   <span class="c">// kvkk | marketing | analytics</span>
   <span class="n">"isGranted"</span>: <span class="k">true</span>
 }</pre>
       <div class="endpoint-desc" style="margin-top:8px">IP adresi ve User-Agent otomatik kaydedilir.</div>
-      <div class="responses"><span class="resp resp-201">201 Created</span></div>
+      <div class="responses"><span class="resp r201">201 Created</span></div>
     </div>
   </div>
-
   <div class="endpoint" onclick="toggle(this)">
-    <div class="endpoint-header">
-      <span class="method m-post">POST</span>
-      <span class="endpoint-path">/api/data-retention/delete</span>
-      <span class="endpoint-summary">Veri sil (Madde 7)</span>
-      <span class="chevron">▼</span>
-    </div>
+    <div class="endpoint-header"><span class="method m-get">GET</span><span class="endpoint-path">/api/consents/{subjectId}</span><span class="endpoint-summary">Onayları sorgula</span><span class="chevron">▼</span></div>
+    <div class="endpoint-body"><div class="responses"><span class="resp r200">200 OK</span></div></div>
+  </div>
+  <div class="endpoint" onclick="toggle(this)">
+    <div class="endpoint-header"><span class="method m-post">POST</span><span class="endpoint-path">/api/data-retention/delete</span><span class="endpoint-summary">Veri sil — Madde 7</span><span class="chevron">▼</span></div>
     <div class="endpoint-body">
-      <div class="endpoint-desc">Kişiye ait tüm lead ve consent kayıtlarını kalıcı olarak siler.</div>
       <div class="code-label">İstek</div>
       <pre>{ <span class="n">"subjectEmail"</span>: <span class="s">"kullanici@email.com"</span> }</pre>
-      <div class="responses"><span class="resp resp-200">200 OK</span></div>
+      <div class="responses"><span class="resp r200">200 OK</span></div>
     </div>
   </div>
-
   <div class="endpoint" onclick="toggle(this)">
-    <div class="endpoint-header">
-      <span class="method m-post">POST</span>
-      <span class="endpoint-path">/api/data-retention/anonymize</span>
-      <span class="endpoint-summary">Anonimleştir (Madde 7)</span>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="endpoint-body">
-      <div class="endpoint-desc">Kişisel verileri silinmek yerine anonim hale getirir. İstatistiksel veriler korunur.</div>
-      <div class="responses"><span class="resp resp-200">200 OK</span></div>
-    </div>
+    <div class="endpoint-header"><span class="method m-post">POST</span><span class="endpoint-path">/api/data-retention/anonymize</span><span class="endpoint-summary">Anonimleştir — Madde 7</span><span class="chevron">▼</span></div>
+    <div class="endpoint-body"><div class="endpoint-desc">Ad, email, telefon anonim hale getirilir. İstatistiksel veriler korunur.</div><div class="responses"><span class="resp r200">200 OK</span></div></div>
   </div>
-</div>
+</section>
 
 <hr>
 
 <!-- AUDIT -->
-<div class="section" id="audit">
-  <div class="section-title">Audit Log <span class="tag" style="background:rgba(250,204,21,0.1);color:#facc15">Audit</span></div>
-  <div class="section-desc">Tüm kritik işlemlerin izlenebilirlik kaydı.</div>
-
+<section class="section" id="audit">
+  <div class="section-header">
+    <div class="section-title">Audit Log <span class="tag" style="background:rgba(250,204,21,0.1);color:#facc15">Audit</span></div>
+    <div class="section-desc">Tüm kritik işlemlerin izlenebilirlik kaydı.</div>
+  </div>
   <div class="endpoint" onclick="toggle(this)">
-    <div class="endpoint-header">
-      <span class="method m-post">POST</span>
-      <span class="endpoint-path">/api/audit-logs</span>
-      <span class="endpoint-summary">Log oluştur</span>
-      <span class="chevron">▼</span>
-    </div>
+    <div class="endpoint-header"><span class="method m-post">POST</span><span class="endpoint-path">/api/audit-logs</span><span class="endpoint-summary">Log oluştur</span><span class="chevron">▼</span></div>
     <div class="endpoint-body">
       <div class="code-label">İstek</div>
       <pre>{
@@ -788,90 +795,70 @@ ai_score_generated, ai_recommendation_created</pre>
   <span class="n">"action"</span>: <span class="s">"lead_viewed"</span>,
   <span class="n">"entityType"</span>: <span class="s">"lead"</span>,
   <span class="n">"entityId"</span>: <span class="s">"uuid"</span>,
-  <span class="n">"detail"</span>: <span class="s">"Lead detay sayfası açıldı"</span>,
-  <span class="n">"ipAddress"</span>: <span class="s">"192.168.1.10"</span>
+  <span class="n">"detail"</span>: <span class="s">"Lead detay sayfası açıldı"</span>
 }</pre>
-      <div class="params-title" style="margin-top:12px">Önerilen action değerleri</div>
-      <pre><span class="c">login, profile_created, profile_updated
-lead_viewed, lead_updated, lead_exported
-document_shared, event_sent, ai_score_generated
-crm_task_created, nfc_linked, user_deactivated
-data_export, data_deletion, data_anonymization</span></pre>
-      <div class="responses"><span class="resp resp-201">201 Created</span></div>
+      <div class="code-label">Önerilen action değerleri</div>
+      <pre><span class="c">login · profile_created · lead_viewed · lead_exported
+document_shared · ai_score_generated · crm_task_created
+data_export · data_deletion · data_anonymization</span></pre>
+      <div class="responses"><span class="resp r201">201 Created</span></div>
     </div>
   </div>
-
   <div class="endpoint" onclick="toggle(this)">
-    <div class="endpoint-header">
-      <span class="method m-get">GET</span>
-      <span class="endpoint-path">/api/audit-logs/by-entity/{entityType}/{entityId}</span>
-      <span class="endpoint-summary">Entity'e göre loglar</span>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="endpoint-body">
-      <div class="endpoint-desc">Belirli bir kaydın (lead, card, document vb.) tüm işlem geçmişini döndürür.</div>
-      <div class="responses"><span class="resp resp-200">200 OK</span></div>
-    </div>
+    <div class="endpoint-header"><span class="method m-get">GET</span><span class="endpoint-path">/api/audit-logs/by-user/{userId}</span><span class="endpoint-summary">Kullanıcı logları</span><span class="chevron">▼</span></div>
+    <div class="endpoint-body"><div class="responses"><span class="resp r200">200 OK</span></div></div>
   </div>
-</div>
+  <div class="endpoint" onclick="toggle(this)">
+    <div class="endpoint-header"><span class="method m-get">GET</span><span class="endpoint-path">/api/audit-logs/by-entity/{type}/{id}</span><span class="endpoint-summary">Entity logları</span><span class="chevron">▼</span></div>
+    <div class="endpoint-body"><div class="endpoint-desc">Belirli bir kaydın (lead, card, document) tüm işlem geçmişi.</div><div class="responses"><span class="resp r200">200 OK</span></div></div>
+  </div>
+</section>
 
 <hr>
 
 <!-- NFC -->
-<div class="section" id="nfc">
-  <div class="section-title">NFC</div>
-  <div class="section-desc">NFC/QR kod ile dijital kartvizite yönlendirme.</div>
-
+<section class="section" id="nfc">
+  <div class="section-header">
+    <div class="section-title">NFC</div>
+    <div class="section-desc">NFC/QR kod ile dijital kartvizite yönlendirme.</div>
+  </div>
   <div class="endpoint" onclick="toggle(this)">
-    <div class="endpoint-header">
-      <span class="method m-post">POST</span>
-      <span class="endpoint-path">/api/nfc/link</span>
-      <span class="endpoint-summary">NFC kodu bağla</span>
-      <span class="chevron">▼</span>
-    </div>
+    <div class="endpoint-header"><span class="method m-post">POST</span><span class="endpoint-path">/api/nfc/link</span><span class="endpoint-summary">NFC kodu bağla</span><span class="chevron">▼</span></div>
     <div class="endpoint-body">
       <div class="code-label">İstek</div>
       <pre>{ <span class="n">"nfcCode"</span>: <span class="s">"PMGO-000123"</span>, <span class="n">"cardId"</span>: <span class="s">"uuid"</span> }</pre>
-      <div class="responses"><span class="resp resp-200">200 OK</span><span class="resp resp-404">404 Not Found</span></div>
+      <div class="responses"><span class="resp r200">200 OK</span><span class="resp r404">404 Not Found</span></div>
     </div>
   </div>
-
   <div class="endpoint" onclick="toggle(this)">
-    <div class="endpoint-header">
-      <span class="method m-get">GET</span>
-      <span class="endpoint-path">/api/nfc/{nfcCode}</span>
-      <span class="endpoint-summary">NFC yönlendirmesi</span>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="endpoint-body">
-      <div class="endpoint-desc">NFC okutulduğunda public profile yönlendirir, event kaydeder. Auth gerektirmez.</div>
-      <div class="responses"><span class="resp resp-200">302 Redirect</span><span class="resp resp-404">404 Not Found</span></div>
-    </div>
+    <div class="endpoint-header"><span class="method m-get">GET</span><span class="endpoint-path">/api/nfc/{nfcCode}</span><span class="endpoint-summary">NFC yönlendirmesi</span><span class="chevron">▼</span></div>
+    <div class="endpoint-body"><div class="endpoint-desc">NFC okutulduğunda public profile yönlendirir, event kaydeder. Auth gerektirmez.</div><div class="responses"><span class="resp r200">302 Redirect</span></div></div>
   </div>
-</div>
+</section>
 
+</div>
 </main>
 
 <script>
-function toggle(el) {
-  el.classList.toggle('open');
-}
-function scrollTo(id) {
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-}
-window.addEventListener('scroll', () => {
-  const sections = ['intro','auth','errors','health','cards','leads','events','docs','engage','ai','payment','dealer','commerce','kvkk','audit','nfc'];
-  const links = document.querySelectorAll('.nav-link');
-  let current = '';
-  sections.forEach(id => {
-    const el = document.getElementById(id);
-    if (el && window.scrollY >= el.offsetTop - 80) current = id;
+function toggle(el){el.classList.toggle('open');}
+function goto(id){
+  document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});
+  document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l=>{
+    if(l.getAttribute('onclick')?.includes("'"+id+"'")||l.getAttribute('onclick')?.includes('"'+id+'"'))
+      l.classList.add('active');
   });
-  links.forEach((l, i) => {
-    const ids = ['intro','auth','errors','health','cards','leads','events','docs','engage','ai','payment','dealer','commerce','kvkk','audit','nfc'];
-    if (l.getAttribute('onclick') && l.getAttribute('onclick').includes(ids[Math.floor(i/1)])) {}
+}
+window.addEventListener('scroll',()=>{
+  const ids=['intro','auth','errors','health','identity','leads','events','docs','engage','ai','payment','dealer','commerce','kvkk','audit','nfc'];
+  let cur='intro';
+  ids.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el&&window.scrollY>=el.offsetTop-100)cur=id;
+  });
+  document.querySelectorAll('.nav-link').forEach(l=>{
+    const match=l.getAttribute('onclick')?.includes("'"+cur+"'")||l.getAttribute('onclick')?.includes('"'+cur+'"');
+    l.classList.toggle('active',!!match);
   });
 });
 </script>
